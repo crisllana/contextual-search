@@ -1,14 +1,24 @@
 package org.search.contextualSearch.model;
 
 import lombok.Generated;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.*;
 
 @Generated
+@Document(indexName = "person")
+@Setting(settingPath = "/settings/settings.json")
 public class Person {
 
+    @Id
+    private String id;
+
+    @Field(type = FieldType.Text)
     private String name;
 
+    @Field(type = FieldType.Text)
     private String surname;
 
+    @Field(type = FieldType.Integer)
     private int age;
 
     public Person(String name, String surname, int age) {

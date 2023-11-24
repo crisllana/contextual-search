@@ -19,6 +19,6 @@ class PersonServiceTest {
         Person person = new Person("Pepe", "Garcia", 22);
         personService.addPerson(person);
 
-        assertEquals(person, personService.getPerson("Pepe"));
+        assertEquals(person, personService.findByName("Pepe"));
     }
 }

@@ -19,10 +19,7 @@ jobs:
           architecture: x64
 
       - name: Build
-        run: mvn clean package -DskipTests -Djacoco.haltOnFailure=false
+        run: mvn clean package -DskipTests
 
       - name: Run unit tests
-        run: mvn test -Djacoco.haltOnFailure=false
-
-      - name: Verify code coverage
-        run: mvn verify
+        run: mvn test

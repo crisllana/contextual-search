@@ -1,21 +1,22 @@
 package org.search.contextualSearch.service;
 
 import org.search.contextualSearch.model.Person;
+import org.search.contextualSearch.repository.ElasticPersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class PersonService {
 
-    private final Map<String, Person> personMap = new HashMap<>();
+    @Autowired
+    private ElasticPersonRepository elasticPersonRepository;
 
-    public void addPerson(Person person){
-        personMap.put(person.getName(), person);
+    public void addPerson(Person person) {
+        elasticPersonRepository.save(person);
     }
 
-    public Person getPerson(String name){
-        return personMap.get(name);
+    public Person findByName(String name) {
+        return elasticPersonRepository.findByName(name);
     }
+
 }

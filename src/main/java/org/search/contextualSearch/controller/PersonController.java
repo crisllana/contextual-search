@@ -2,6 +2,7 @@ package org.search.contextualSearch.controller;
 
 import org.search.contextualSearch.model.Person;
 import org.search.contextualSearch.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,15 +12,12 @@ import java.util.Objects;
 @RestController
 public class PersonController {
 
-    private final PersonService personService;
-
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
+    @Autowired
+    private PersonService personService;
 
     @GetMapping("/person/{name}")
     public ResponseEntity<Person> getPerson(@PathVariable String name) {
-        Person person = personService.getPerson(name);
+        Person person = personService.findByName(name);
         if (Objects.isNull(person))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
